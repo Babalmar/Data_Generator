@@ -17,7 +17,7 @@ def email():
         for line in f:
             line = line.strip('\n')
             email_body.append(line)
-    domain = [".com", ".org", ".mil", ".net", "edu", ".pl", ".de", ".fr", ".ie"]
+    domain = [".com", ".org", ".mil", ".net", ".edu", ".pl", ".de", ".fr", ".ie", ".us", ".co.uk"]
     local_part = email_body[random.randint(0, len(email_body)-1)]
     host_name = email_body[random.randint(0, len(email_body)-1)]
     mail_domain = (domain[random.randint(0, len(domain)-1)])
@@ -31,6 +31,9 @@ def generate_data(random_mail):
     print("Last name: {}".format(last_names[random.randint(0, len(last_names) - 1)]))
     print("Sex: {}".format(sex[random.randint(0, len(sex) - 1)]))
     print("E-mail: {}".format(random_mail))
+
+def save_to_file():
+    pass
 
 names()
 generate_data(random_mail)
