@@ -11,28 +11,30 @@ def main():
     Select S for full set (with json & xml)
     Select Q to quit
     
-    Select: \n
+    Select: 
     """
     selection = input(menu)
 
-    if selection in ("F", "f"):
-        print("First name: {}".format(name_surname[0]))
-    elif selection in ("L", "l"):
-        print("Last name: {}".format(name_surname[1]))
-    elif selection in ("N", "n"):
-        print("Nick: {}".format(nick))
-    elif selection in ("E", "e"):
-        print("E-mail: {}".format(e_mail))
-    elif selection in ("A", "a"):
-        print("Address: {}".format(address))
-    elif selection in ("S", "s"):
-        for key, value in test_data.items():
-            print(key, value)
-        save_to_xml()
-    elif selection in ("Q", "q"):
-        print("Program terminated")
-    else:
-        print("Unknown command")
+    while selection not in ("Q", "q"):
+        if selection in ("F", "f"):
+            print("First name: {}".format(name_surname[0]))
+        elif selection in ("L", "l"):
+            print("Last name: {}".format(name_surname[1]))
+        elif selection in ("N", "n"):
+            print("Nick: {}".format(nick))
+        elif selection in ("E", "e"):
+            print("E-mail: {}".format(e_mail))
+        elif selection in ("A", "a"):
+            print("Address: {}".format(address))
+        elif selection in ("S", "s"):
+            for key, value in test_data.items():
+                print(key, value)
+                save_to_xml()
+        else:
+            print("Unknown command")
+        input("Press any to continue...")
+        selection = input(menu)
+    print("Program terminated")
 
 
 def names():
@@ -95,8 +97,8 @@ def generate_address():
     city_code = random.choice(code)
     city_name = random.choice(city)
     city_street = random.choice(street)
-    address = city_code + " " + city_name.strip('\n') + ", " + city_street + " " + str(random.randint(1, 100))
-    return address
+    full_address = city_code + " " + city_name.strip('\n') + ", " + city_street + " " + str(random.randint(1, 100))
+    return full_address
 
 
 address = generate_address()
@@ -114,7 +116,9 @@ def save_to_json():
 
     return data_to_json
 
+
 test_data = save_to_json()
+
 
 def save_to_xml():
     import xml.etree.ElementTree as xml
@@ -142,5 +146,6 @@ def save_to_xml():
 
     with open("User.xml", "wb") as files:
         tree.write(files)
+
 
 main()
