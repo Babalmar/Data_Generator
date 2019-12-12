@@ -41,9 +41,9 @@ def main():
         elif selection in ("S", "s"):
             pool_data()
         elif selection in ("J", "j"):
-            save_to_json()
+            save_to_json(test_data)
         elif selection in ("X", "x"):
-            save_to_xml()
+            save_to_xml(test_data)
         else:
             print("Unknown command")
         input("Press any to continue...")
@@ -111,48 +111,55 @@ def pool_data():
     e_mail = email()
     address = generate_address()
 
-    data = {"First name:": name_surname[0], "Last name:": name_surname[1], "Nick:": nick, "E-mail:": e_mail,
-                    "Address:": address}
+
+def full_set():
+    data = {"First name": name_surname[0], "Last name": name_surname[1], "Nick": nick, "E-mail": e_mail, "Address": address}
 
     for key, value in data.items():
-        print(key, value)
+        print(key + ":" + value)
     return data
 
 def save_to_json():
     import json
 
-    json_string = json.dumps()
+    pool_data()
+
+    json_string = json.dumps(test_data)
     with open("data.json", "w") as f:
         f.write(json_string)
 
+    print(json_string)
     print("Test data saved to data.json file")
 
-def save_to_xml():
+def save_to_xml(test_data):
     import xml.etree.ElementTree as xml
+
+    pool_data()
 
     root = xml.Element("Test data")
     cl = xml.Element("User")
     root.append(cl)
 
     name1 = xml.SubElement(cl, "First name")
-    name1.text = name_surname[0]
+    name1.text = test_data.get("First name")
 
     surname1 = xml.SubElement(cl, "Last name")
-    surname1.text = name_surname[1]
+    surname1.text = test_data.get("Last name")
 
     nick1 = xml.SubElement(cl, "Nick")
-    nick1.text = nick
+    nick1.text = test_data.get("Nick")
 
     email1 = xml.SubElement(cl, "Email")
-    email1.text = e_mail
+    email1.text = test_data.get("Email")
 
     address1 = xml.SubElement(cl, "Address")
-    address1.text = address
+    address1.text = test_data.get("Address")
 
     tree = xml.ElementTree(root)
 
     with open("User.xml", "wb") as files:
         tree.write(files)
+
     print("Test data saved to user.xml file")
 
 
