@@ -1,5 +1,10 @@
 import random
 
+name_surname = []
+nick = ""
+e_mail = ""
+address = ""
+
 
 def main():
     menu = """
@@ -8,7 +13,9 @@ def main():
     Select N for nick
     Select E for e-mail
     Select A for address
-    Select S for full set (with json & xml)
+    Select S for full set 
+    Select J for JSON
+    Select X for XML 
     Select Q to quit
     
     Select: 
@@ -17,19 +24,26 @@ def main():
 
     while selection not in ("Q", "q"):
         if selection in ("F", "f"):
+            name_surname = names()
             print("First name: {}".format(name_surname[0]))
         elif selection in ("L", "l"):
+            name_surname = names()
             print("Last name: {}".format(name_surname[1]))
         elif selection in ("N", "n"):
+            nick = gen_nick()
             print("Nick: {}".format(nick))
         elif selection in ("E", "e"):
+            e_mail = email()
             print("E-mail: {}".format(e_mail))
         elif selection in ("A", "a"):
+            address = generate_address()
             print("Address: {}".format(address))
         elif selection in ("S", "s"):
-            for key, value in test_data.items():
-                print(key, value)
-                save_to_xml()
+            pool_data()
+        elif selection in ("J", "j"):
+            save_to_json()
+        elif selection in ("X", "x"):
+            save_to_xml()
         else:
             print("Unknown command")
         input("Press any to continue...")
@@ -51,9 +65,6 @@ def names():
     return name_and_surname
 
 
-name_surname = names()
-
-
 def gen_nick():
     nick_list = []
     with open("words.txt", "r") as f:
@@ -62,9 +73,6 @@ def gen_nick():
             nick_list.append(line)
     nickname = random.choice(nick_list) + str(random.randint(1, 100))
     return nickname
-
-
-nick = gen_nick()
 
 
 def email():
@@ -79,9 +87,6 @@ def email():
     mail_domain = random.choice(domain)
     full_mail = local_part + "@" + host_name + mail_domain
     return full_mail
-
-
-e_mail = email()
 
 
 def generate_address():
@@ -100,25 +105,27 @@ def generate_address():
     full_address = city_code + " " + city_name.strip('\n') + ", " + city_street + " " + str(random.randint(1, 100))
     return full_address
 
+def pool_data():
+    name_surname = names()
+    nick = gen_nick()
+    e_mail = email()
+    address = generate_address()
 
-address = generate_address()
+    data = {"First name:": name_surname[0], "Last name:": name_surname[1], "Nick:": nick, "E-mail:": e_mail,
+                    "Address:": address}
 
+    for key, value in data.items():
+        print(key, value)
+    return data
 
 def save_to_json():
     import json
 
-    data_to_json = {"First name:": name_surname[0], "Last name:": name_surname[1], "Nick:": nick, "E-mail:": e_mail,
-                    "Address:": address}
-
-    json_string = json.dumps(data_to_json)
+    json_string = json.dumps()
     with open("data.json", "w") as f:
         f.write(json_string)
 
-    return data_to_json
-
-
-test_data = save_to_json()
-
+    print("Test data saved to data.json file")
 
 def save_to_xml():
     import xml.etree.ElementTree as xml
@@ -146,6 +153,7 @@ def save_to_xml():
 
     with open("User.xml", "wb") as files:
         tree.write(files)
+    print("Test data saved to user.xml file")
 
 
 main()
