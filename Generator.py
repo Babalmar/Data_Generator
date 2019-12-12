@@ -4,18 +4,20 @@ import random
 def main():
     menu = """
     Select F for first name
-    Select S for surname
+    Select L for last name
     Select N for nick
     Select E for e-mail
     Select A for address
-    Select G for full set (with json & xml)
-    Select Q to quit\n
+    Select S for full set (with json & xml)
+    Select Q to quit
+    
+    Select: \n
     """
     selection = input(menu)
 
     if selection in ("F", "f"):
         print("First name: {}".format(name_surname[0]))
-    elif selection in ("S", "s"):
+    elif selection in ("L", "l"):
         print("Last name: {}".format(name_surname[1]))
     elif selection in ("N", "n"):
         print("Nick: {}".format(nick))
@@ -23,7 +25,7 @@ def main():
         print("E-mail: {}".format(e_mail))
     elif selection in ("A", "a"):
         print("Address: {}".format(address))
-    elif selection in ("G", "g"):
+    elif selection in ("S", "s"):
         for key, value in test_data.items():
             print(key, value)
         save_to_xml()
