@@ -58,6 +58,25 @@ def main():
         selection = input(menu)
     print("Program terminated")
 
+        elif selection in ("X", "x"):
+            name_surname = names()
+            nick = gen_nick()
+            e_mail = email()
+            address = generate_address()
+            save_to_xml(name_surname, nick, e_mail, address)
+=======
+            full_set()
+        elif selection in ("J", "j"):
+            save_to_json(test_data)
+        elif selection in ("X", "x"):
+            save_to_xml(test_data)
+>>>>>>> 7b772f4fcd3cce5e601329f6534cdd622b0c1d97
+        else:
+            print("Unknown command")
+        input("Press any to continue...")
+        selection = input(menu)
+    print("Program terminated")
+
 
 def names():
     name_and_surname = []
@@ -81,6 +100,10 @@ def gen_nick():
             nick_list.append(line)
     nickname = random.choice(nick_list) + str(random.randint(1, 100))
     return nickname.capitalize()
+
+=======
+    return nickname
+>>>>>>> 7b772f4fcd3cce5e601329f6534cdd622b0c1d97
 
 
 def email():
@@ -131,6 +154,26 @@ def save_to_json(name_surname, nick, e_mail, address):
                  "Address": address}
 
     json_string = json.dumps(json_data)
+
+    for key, value in data.items():
+        print(key + ":" + value)
+    return data
+
+<<<<<<< HEAD
+
+def save_to_json(name_surname, nick, e_mail, address):
+    import json
+
+    json_data = {"First name": name_surname[0], "Last name": name_surname[1], "Nick": nick, "E-mail": e_mail,
+                 "Address": address}
+
+    json_string = json.dumps(json_data)
+=======
+
+    pool_data()
+
+    json_string = json.dumps(test_data)
+>>>>>>> 7b772f4fcd3cce5e601329f6534cdd622b0c1d97
     with open("data.json", "w") as f:
         f.write(json_string)
 
@@ -159,6 +202,30 @@ def save_to_xml(name_surname, nick, e_mail, address):
 
     address1 = xml.SubElement(cl, "Address")
     address1.text = address
+
+    tree = xml.ElementTree(root)
+
+    with open("User.xml", "wb") as files:
+        tree.write(files)
+
+    print("Test data saved to user.xml file")
+
+
+main()
+    name1.text = test_data.get("First name")
+
+    surname1 = xml.SubElement(cl, "Last name")
+    surname1.text = test_data.get("Last name")
+
+    nick1 = xml.SubElement(cl, "Nick")
+    nick1.text = test_data.get("Nick")
+
+    email1 = xml.SubElement(cl, "Email")
+    email1.text = test_data.get("Email")
+
+    address1 = xml.SubElement(cl, "Address")
+    address1.text = test_data.get("Address")
+>>>>>>> 7b772f4fcd3cce5e601329f6534cdd622b0c1d97
 
     tree = xml.ElementTree(root)
 

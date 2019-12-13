@@ -1,0 +1,6 @@
+Generator_BASE_*.py
+Generator_LOCAL_*.py
+Generator_REMOTE_*.py
+Generator_BACKUP_*.py
+.idea
+Generator.py.orig
