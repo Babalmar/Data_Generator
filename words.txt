@@ -65,6 +65,7 @@ lowly
 eyes
 pop
 admit
+knight
 appear
 slippery
 voiceless
@@ -98,3 +99,5 @@ disgusted
 mend
 rabid
 warn
+rogue
+shiny

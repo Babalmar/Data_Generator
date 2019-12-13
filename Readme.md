@@ -1,5 +1,13 @@
-Simple Data_Generator
+### Simple Data_Generator
 
-Allows to generate: First name Last name Nick E-mail Address
+Allows to generate following data: 
+*First name 
+*Last name 
+*Nick 
+*E-mail 
+*Address
+*Full set (display only)
+*Full set (JSON)
+*Full set (XML)
 
-If full set is generated, output is also saved to json and xml file.
+
