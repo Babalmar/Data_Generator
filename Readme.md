@@ -9,7 +9,6 @@ Simple stand-alone terminal app that allows to generate random data:
 - Full set (XML)
 
 ### Data_Generator_library.py
-# Data Generator
 
 Data Generator library allows to generate a numer of random data:
 - First name
